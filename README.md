@@ -10,6 +10,6 @@ export port=$(freeport)
 # Start standalone httpd server for testing
 httpd -X -c "Listen $port" &
 
-# Curl apache on the selected port
+# Curl local server on the selected port
 curl localhost:$port
 ```
