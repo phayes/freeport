@@ -22,6 +22,6 @@ curl localhost:$port
 ```bash
 sudo apt-get install golang
 mkdir /opt/gopath && export GOPATH=/opt/gopath #replace with desired GOPATH
-go get github.com/phayes/freeport/cmd/freeport
 export PATH=$PATH:$GOPATH/bin # For convenience, add go's bin dir to your PATH
+go get github.com/phayes/freeport/cmd/freeport
 ```
