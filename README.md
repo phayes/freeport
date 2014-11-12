@@ -20,8 +20,8 @@ curl localhost:$port
 
 #### Building From Source
 ```bash
-sudo apt-get install golang
-mkdir /opt/gopath && export GOPATH=/opt/gopath #replace with desired GOPATH
-export PATH=$PATH:$GOPATH/bin # For convenience, add go's bin dir to your PATH
+sudo apt-get install golang                    # Download go. Alternativly build from source: https://golang.org/doc/install/source
+mkdir /opt/gopath && export GOPATH=/opt/gopath # Replace with desired GOPATH
+export PATH=$PATH:$GOPATH/bin                  # For convenience, add go's bin dir to your PATH
 go get github.com/phayes/freeport/cmd/freeport
 ```
