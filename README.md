@@ -13,3 +13,7 @@ httpd -X -c "Listen $port" &
 # Curl local server on the selected port
 curl localhost:$port
 ```
+
+###Binaries
+ - Mac:   https://phayes.github.io/bin/current/freeport/mac/freeport
+ - Linux: https://phayes.github.io/bin/current/freeport/linux/freeport
