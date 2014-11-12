@@ -14,6 +14,14 @@ httpd -X -c "Listen $port" &
 curl localhost:$port
 ```
 
-###Binaries
+###Binary Downloads
  - Mac:   https://phayes.github.io/bin/current/freeport/mac/freeport
  - Linux: https://phayes.github.io/bin/current/freeport/linux/freeport
+
+### Building From Source
+```bash
+sudo apt-get install golang
+mkdir /opt/gopath && export GOPATH=/opt/gopath #replace with desired GOPATH
+go get github.com/phayes/freeport/cmd/freeport
+ln -s $GOAPTH/bin/freeport /use/local/bin/freeport
+```
