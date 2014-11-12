@@ -1,4 +1,4 @@
-freeport
+FreePort
 ========
 
 Get a free open TCP port that is ready to use
@@ -14,11 +14,11 @@ httpd -X -c "Listen $port" &
 curl localhost:$port
 ```
 
-###Binary Downloads
+#### Binary Downloads
  - Mac:   https://phayes.github.io/bin/current/freeport/mac/freeport
  - Linux: https://phayes.github.io/bin/current/freeport/linux/freeport
 
-### Building From Source
+#### Building From Source
 ```bash
 sudo apt-get install golang
 mkdir /opt/gopath && export GOPATH=/opt/gopath #replace with desired GOPATH
