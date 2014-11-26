@@ -15,8 +15,8 @@ curl localhost:$port
 ```
 
 #### Binary Downloads
- - Mac:   https://phayes.github.io/bin/current/freeport/mac/freeport
- - Linux: https://phayes.github.io/bin/current/freeport/linux/freeport
+ - Mac:   https://phayes.github.io/bin/current/freeport/mac/freeport.gz
+ - Linux: https://phayes.github.io/bin/current/freeport/linux/freeport.gz
 
 #### Building From Source
 ```bash
