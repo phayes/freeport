@@ -1,11 +1,17 @@
 package main
 
 import (
+	freeport "../.."
 	"fmt"
-	"github.com/phayes/freeport"
+	"os"
 	"strconv"
 )
 
 func main() {
-	fmt.Println(strconv.Itoa(freeport.GetPort()))
+	port, err := freeport.GetPort()
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+	fmt.Print(port)
 }
