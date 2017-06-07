@@ -5,16 +5,16 @@ import (
 )
 
 // Ask the kernel for a free open port that is ready to use
-func GetPort() int {
+func GetPort() (int, error) {
 	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
 	if err != nil {
-		panic(err)
+		return 0, err
 	}
 
 	l, err := net.ListenTCP("tcp", addr)
 	if err != nil {
-		panic(err)
+		return 0, err
 	}
 	defer l.Close()
-	return l.Addr().(*net.TCPAddr).Port
+	return l.Addr().(*net.TCPAddr).Port, nil
 }
