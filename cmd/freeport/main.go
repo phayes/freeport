@@ -1,10 +1,9 @@
 package main
 
 import (
-	freeport "../.."
 	"fmt"
+	freeport "github.com/phayes/freeport"
 	"os"
-	"strconv"
 )
 
 func main() {
