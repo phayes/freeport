@@ -1,25 +1,23 @@
 project_name: freeport
+
 release:
   github:
     owner: phayes
     name: freeport
-brew:
-  commit_author:
-    name: goreleaserbot
-    email: goreleaser@carlosbecker.com
-  install: bin.install "freeport"
+
 builds:
-- goos:
-  - linux
-  - darwin
+  - goos:
+    - linux
+    - darwin
   goarch:
-  - amd64
-  - "386"
+    - amd64
+    - "386"
   goarm:
-  - "6"
+    - "6"
   main: ./cmd/freeport
   ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
   binary: freeport
+
 archive:
   format: tar.gz
   name_template: '{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{
@@ -33,8 +31,10 @@ archive:
   - README*
   - changelog*
   - CHANGELOG*
+
 snapshot:
   name_template: SNAPSHOT-{{ .Commit }}
+
 checksum:
   name_template: '{{ .ProjectName }}_{{ .Version }}_checksums.txt'
 
@@ -76,6 +76,7 @@ fpm:
   #files:
   #  "scripts/etc/init.d/": "/etc/init.d"
 
+# Homebrew repos
 brew:
   # Reporitory to push the tap to.
   github:
