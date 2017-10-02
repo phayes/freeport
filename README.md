@@ -33,6 +33,12 @@ func main() {
 
 ## Installation
 
+#### Mac OSX
+```bash
+brew install phayes/repo/freeport
+```
+
+
 #### CentOS and other RPM based systems
 ```bash
 wget https://github.com/phayes/freeport/releases/download/1.0.2/freeport_1.0.2_linux_386.rpm
