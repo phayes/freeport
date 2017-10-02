@@ -6,11 +6,6 @@ import (
 	"testing"
 )
 
-const (
-	ConnectionHost = "localhost"
-	ConnectionType = "tcp"
-)
-
 func TestGetFreePort(t *testing.T) {
 	port, err := GetFreePort()
 	if err != nil {
