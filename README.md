@@ -54,5 +54,5 @@ dpkg -i freeport_1.0.2_linux_amd64.deb
 #### Building From Source
 ```bash
 sudo apt-get install golang                    # Download go. Alternativly build from source: https://golang.org/doc/install/source
-go get github.com/phayes/freeport/cmd/freeport
+go get github.com/phayes/freeport
 ```
