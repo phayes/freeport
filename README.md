@@ -35,14 +35,14 @@ func main() {
 
 #### CentOS and other RPM based systems
 ```bash
-wget https://github.com/phayes/freeport/releases/download/0.1.2/freeport_0.1.2_linux_386.rpm
-rpm -Uvh freeport_0.1.2_linux_386.rpm
+wget https://github.com/phayes/freeport/releases/download/1.0.2/freeport_1.0.2_linux_386.rpm
+rpm -Uvh freeport_1.0.2_linux_386.rpm
 ```
 
 #### Ubuntu and other DEB based systems
 ```bash
-wget wget https://github.com/phayes/freeport/releases/download/0.1.2/freeport_0.1.2_linux_amd64.deb
-dpkg -i freeport_0.1.2_linux_amd64.deb
+wget wget https://github.com/phayes/freeport/releases/download/1.0.2/freeport_1.0.2_linux_amd64.deb
+dpkg -i freeport_1.0.2_linux_amd64.deb
 ```
 
 ## Building From Source
