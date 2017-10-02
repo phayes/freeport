@@ -1,6 +1,15 @@
 package freeport
 
-import "testing"
+import (
+	"net"
+	"strconv"
+	"testing"
+)
+
+const (
+	ConnectionHost = "localhost"
+	ConnectionType = "tcp"
+)
 
 func TestGetFreePort(t *testing.T) {
 	port, err := GetFreePort()
@@ -10,4 +19,11 @@ func TestGetFreePort(t *testing.T) {
 	if port == 0 {
 		t.Error("port == 0")
 	}
+
+	// Try to listen on the port
+	l, err := net.Listen("tcp", "localhost"+":"+strconv.Itoa(port))
+	if err != nil {
+		t.Error(err)
+	}
+	defer l.Close()
 }
