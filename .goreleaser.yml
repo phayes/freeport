@@ -6,17 +6,17 @@ release:
     name: freeport
 
 builds:
-  - goos:
-    - linux
-    - darwin
-  goarch:
-    - amd64
-    - "386"
-  goarm:
-    - "6"
-  main: ./cmd/freeport
-  ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
-  binary: freeport
+  - binary: freeport
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - "386"
+    goarm:
+      - "6"
+    main: ./cmd/freeport
+    ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
 
 archive:
   format: tar.gz
