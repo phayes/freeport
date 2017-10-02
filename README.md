@@ -54,7 +54,5 @@ dpkg -i freeport_1.0.2_linux_amd64.deb
 ## Building From Source
 ```bash
 sudo apt-get install golang                    # Download go. Alternativly build from source: https://golang.org/doc/install/source
-mkdir ~/.gopath && export GOPATH=~/.gopath     # Replace with desired GOPATH
-export PATH=$PATH:$GOPATH/bin                  # For convenience, add go's bin dir to your PATH
 go get github.com/phayes/freeport/cmd/freeport
 ```
