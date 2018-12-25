@@ -6,8 +6,8 @@ import (
 	"testing"
 )
 
-func TestGetFreePort(t *testing.T) {
-	port, err := GetFreePort()
+func TestGetFreePortTCP(t *testing.T) {
+	port, err := GetFreePort("tcp")
 	if err != nil {
 		t.Error(err)
 	}
@@ -23,9 +23,26 @@ func TestGetFreePort(t *testing.T) {
 	defer l.Close()
 }
 
-func TestGetFreePorts(t *testing.T) {
+func TestGetFreePortUDP(t *testing.T) {
+	port, err := GetFreePort("udp")
+	if err != nil {
+		t.Error(err)
+	}
+	if port == 0 {
+		t.Error("port == 0")
+	}
+
+	// Try to listen on the port
+	l, err := net.ListenPacket("udp", ":"+strconv.Itoa(port))
+	if err != nil {
+		t.Error(err)
+	}
+	defer l.Close()
+}
+
+func TestGetFreePortsTCP(t *testing.T) {
 	count := 3
-	ports, err := GetFreePorts(count)
+	ports, err := GetFreePorts("tcp", count)
 	if err != nil {
 		t.Error(err)
 	}
@@ -39,6 +56,29 @@ func TestGetFreePorts(t *testing.T) {
 
 		// Try to listen on the port
 		l, err := net.Listen("tcp", "localhost"+":"+strconv.Itoa(port))
+		if err != nil {
+			t.Error(err)
+		}
+		defer l.Close()
+	}
+}
+
+func TestGetFreePortsUDP(t *testing.T) {
+	count := 3
+	ports, err := GetFreePorts("udp", count)
+	if err != nil {
+		t.Error(err)
+	}
+	if len(ports) == 0 {
+		t.Error("len(ports) == 0")
+	}
+	for _, port := range ports {
+		if port == 0 {
+			t.Error("port == 0")
+		}
+
+		// Try to listen on the port
+		l, err := net.ListenPacket("udp", ":"+strconv.Itoa(port))
 		if err != nil {
 			t.Error(err)
 		}

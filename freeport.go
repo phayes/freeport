@@ -5,7 +5,29 @@ import (
 )
 
 // GetFreePort asks the kernel for a free open port that is ready to use.
-func GetFreePort() (int, error) {
+func GetFreePort(protocol string) (int, error) {
+	if protocol == "udp" {
+		return getFreePortUDP()
+	}
+
+	return getFreePortTCP()
+}
+
+func getFreePortUDP() (int, error) {
+	addr, err := net.ResolveUDPAddr("udp", "localhost:0")
+	if err != nil {
+		return 0, err
+	}
+
+	l, err := net.ListenUDP("udp", addr)
+	if err != nil {
+		return 0, err
+	}
+	defer l.Close()
+	return l.LocalAddr().(*net.UDPAddr).Port, nil
+}
+
+func getFreePortTCP() (int, error) {
 	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
 	if err != nil {
 		return 0, err
@@ -22,15 +44,41 @@ func GetFreePort() (int, error) {
 // GetPort is deprecated, use GetFreePort instead
 // Ask the kernel for a free open port that is ready to use
 func GetPort() int {
-	port, err := GetFreePort()
+	port, err := getFreePortTCP()
 	if err != nil {
 		panic(err)
 	}
 	return port
 }
 
-// GetFreePort asks the kernel for free open ports that are ready to use.
-func GetFreePorts(count int) ([]int, error) {
+// GetFreePorts asks the kernel for free open ports that are ready to use.
+func GetFreePorts(protocol string, count int) ([]int, error) {
+	if protocol == "udp" {
+		return getFreePortsUDP(count)
+	}
+
+	return getFreePortsTCP(count)
+}
+
+func getFreePortsUDP(count int) ([]int, error) {
+	var ports []int
+	for i := 0; i < count; i++ {
+		addr, err := net.ResolveUDPAddr("udp", "localhost:0")
+		if err != nil {
+			return nil, err
+		}
+
+		l, err := net.ListenUDP("udp", addr)
+		if err != nil {
+			return nil, err
+		}
+		defer l.Close()
+		ports = append(ports, l.LocalAddr().(*net.UDPAddr).Port)
+	}
+	return ports, nil
+}
+
+func getFreePortsTCP(count int) ([]int, error) {
 	var ports []int
 	for i := 0; i < count; i++ {
 		addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
