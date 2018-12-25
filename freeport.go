@@ -5,7 +5,12 @@ import (
 )
 
 // GetFreePort asks the kernel for a free open port that is ready to use.
-func GetFreePort(protocol string) (int, error) {
+func GetFreePort() (int, error) {
+	return getFreePortTCP()
+}
+
+// GetFreePortForProtocol asks the kernel for a free open port that is ready to use.
+func GetFreePortForProtocol(protocol string) (int, error) {
 	if protocol == "udp" {
 		return getFreePortUDP()
 	}
@@ -52,7 +57,12 @@ func GetPort() int {
 }
 
 // GetFreePorts asks the kernel for free open ports that are ready to use.
-func GetFreePorts(protocol string, count int) ([]int, error) {
+func GetFreePorts(count int) ([]int, error) {
+	return getFreePortsTCP(count)
+}
+
+// GetFreePortsForProtocol asks the kernel for free open ports that are ready to use.
+func GetFreePortsForProtocol(protocol string, count int) ([]int, error) {
 	if protocol == "udp" {
 		return getFreePortsUDP(count)
 	}

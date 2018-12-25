@@ -7,7 +7,7 @@ import (
 )
 
 func TestGetFreePortTCP(t *testing.T) {
-	port, err := GetFreePort("tcp")
+	port, err := GetFreePortForProtocol("tcp")
 	if err != nil {
 		t.Error(err)
 	}
@@ -24,7 +24,7 @@ func TestGetFreePortTCP(t *testing.T) {
 }
 
 func TestGetFreePortUDP(t *testing.T) {
-	port, err := GetFreePort("udp")
+	port, err := GetFreePortForProtocol("udp")
 	if err != nil {
 		t.Error(err)
 	}
@@ -42,7 +42,7 @@ func TestGetFreePortUDP(t *testing.T) {
 
 func TestGetFreePortsTCP(t *testing.T) {
 	count := 3
-	ports, err := GetFreePorts("tcp", count)
+	ports, err := GetFreePortsForProtocol("tcp", count)
 	if err != nil {
 		t.Error(err)
 	}
@@ -65,7 +65,7 @@ func TestGetFreePortsTCP(t *testing.T) {
 
 func TestGetFreePortsUDP(t *testing.T) {
 	count := 3
-	ports, err := GetFreePorts("udp", count)
+	ports, err := GetFreePortsForProtocol("udp", count)
 	if err != nil {
 		t.Error(err)
 	}
