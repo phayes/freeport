@@ -6,7 +6,7 @@ import (
 
 // GetFreePort asks the kernel for a free open port that is ready to use.
 func GetFreePort() (int, error) {
-	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
+	addr, err := net.ResolveTCPAddr("tcp", ":0")
 	if err != nil {
 		return 0, err
 	}
@@ -15,13 +15,12 @@ func GetFreePort() (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	defer l.Close()
+	l.Close()
 	return l.Addr().(*net.TCPAddr).Port, nil
 }
 
-// GetPort is deprecated, use GetFreePort instead
-// Ask the kernel for a free open port that is ready to use
-func GetPort() int {
+// MustGetFreePort calls GetFreePort and panics on error
+func MustGetFreePort() int {
 	port, err := GetFreePort()
 	if err != nil {
 		panic(err)
@@ -29,21 +28,20 @@ func GetPort() int {
 	return port
 }
 
-// GetFreePort asks the kernel for free open ports that are ready to use.
+// GetFreePorts asks the kernel for free open ports that are ready to use.
 func GetFreePorts(count int) ([]int, error) {
-	var ports []int
+	ports := make([]int, count)
 	for i := 0; i < count; i++ {
-		addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
+		addr, err := net.ResolveTCPAddr("tcp", ":0")
 		if err != nil {
 			return nil, err
 		}
-
 		l, err := net.ListenTCP("tcp", addr)
 		if err != nil {
 			return nil, err
 		}
 		defer l.Close()
-		ports = append(ports, l.Addr().(*net.TCPAddr).Port)
+		ports[i] = l.Addr().(*net.TCPAddr).Port
 	}
 	return ports, nil
 }
