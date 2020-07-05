@@ -25,8 +25,11 @@ func main() {
 	port, err := freeport.GetFreePort()
 	if err != nil {
 		log.Fatal(err)
-	}
+	} 
 	// port is ready to listen on
+	
+	// check if port is really free
+	isFree := freeport.CheckPortIsFree(port)
 }
 
 ```

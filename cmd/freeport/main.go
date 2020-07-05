@@ -14,4 +14,6 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(strconv.Itoa(port))
+
+	fmt.Println(freeport.CheckPortIsFree(port))
 }
