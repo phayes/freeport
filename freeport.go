@@ -1,6 +1,7 @@
 package freeport
 
 import (
+	"fmt"
 	"net"
 )
 
@@ -17,6 +18,24 @@ func GetFreePort() (int, error) {
 	}
 	defer l.Close()
 	return l.Addr().(*net.TCPAddr).Port, nil
+}
+
+// CheckPortIsFree make a connection check to test if port is in use.
+func CheckPortIsFree(port int) bool {
+	conn, err := net.Dial("tcp", fmt.Sprintf(":%d", port))
+
+	if conn != nil {
+		conn.Close()
+	}
+
+	if err == nil {
+		return false
+	}
+
+	if netErr, _ := err.(*net.OpError); netErr.Op == "dial" {
+		return true
+	}
+	return false
 }
 
 // GetPort is deprecated, use GetFreePort instead
