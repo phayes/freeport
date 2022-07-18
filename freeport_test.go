@@ -24,7 +24,7 @@ func TestGetFreePort(t *testing.T) {
 }
 
 func TestGetFreePorts(t *testing.T) {
-	count := 3
+	count := 100
 	ports, err := GetFreePorts(count)
 	if err != nil {
 		t.Error(err)
@@ -44,4 +44,28 @@ func TestGetFreePorts(t *testing.T) {
 		}
 		defer l.Close()
 	}
+}
+
+func TestMustGetFreePort(t *testing.T) {
+	func() {
+		defer func() {
+			v := recover()
+			if v != nil {
+				t.Errorf(`panic: %v`, v)
+			}
+		}()
+
+		port := MustGetFreePort()
+
+		if port == 0 {
+			t.Error("port == 0")
+		}
+
+		// Try to listen on the port
+		l, err := net.Listen("tcp", "localhost"+":"+strconv.Itoa(port))
+		if err != nil {
+			t.Error(err)
+		}
+		defer l.Close()
+	}()
 }
