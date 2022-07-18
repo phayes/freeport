@@ -11,7 +11,8 @@ import (
 func main() {
 	port, err := freeport.GetFreePort()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf(`unable to get free port: %v`, err)
 	}
-	fmt.Println(strconv.Itoa(port))
+
+	fmt.Print(strconv.Itoa(port))
 }
