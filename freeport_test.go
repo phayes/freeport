@@ -45,3 +45,27 @@ func TestGetFreePorts(t *testing.T) {
 		defer l.Close()
 	}
 }
+
+func TestGetFreePortsFromRange(t *testing.T) {
+	start := 60000
+	end := 60010
+	ports, err := GetFreePortsFromRange(start, end)
+	if err != nil {
+		t.Error(err)
+	}
+	if len(ports) == 0 {
+		t.Error("len(ports) == 0")
+	}
+	for _, port := range ports {
+		if port == 0 {
+			t.Error("port == 0")
+		}
+
+		// Try to listen on the port
+		l, err := net.Listen("tcp", "0.0.0.0"+":"+strconv.Itoa(port))
+		if err != nil {
+			t.Error(err)
+		}
+		defer l.Close()
+	}
+}
